@@ -1,3 +1,4 @@
+#include <math.h>
 
 int triangulate(const float *scrVertex, const float *scrColor, int scrCount, int maxWidth, 
                 int maxHeight, int maxDstSize, float *dstVertex, float *dstColor, int *scrTreatedCount);
@@ -5,27 +6,42 @@ int triangulate(const float *scrVertex, const float *scrColor, int scrCount, int
 
 int main() {
 
-    const int count = 10;   // кол-во треугольников
-    const int coords = 9;   // кол-во координат
-    const int RGBA = 4; // кол-во цветовых компонент
-    const int maxWidth = 10;    // максимальныя ширина треугольника
-    const int maxHeight = 10;   // максимальная высота треуголтника
-    const int maxDstSize = 10;  // макс кол-во треуголтников в выходном массиве
+    int count = 10;   // кол-во треугольников
+    int coords = 9;   // кол-во координат
+    int RGBA = 4; // кол-во цветовых компонент
+    int maxWidth = 10;    // максимальныя ширина треугольника
+    int maxHeight = 10;   // максимальная высота треуголтника
+    int maxDstSize = 10;  // макс кол-во треуголтников в выходном массиве
 
     // создание входного массива координат
-    float **scrVertex;
-    scrVertex = new float* [coords];
-    for (int i = 0; i < count; i++) {
-        scrVertex[i] = new float [count];
+    const float **scrVertex;
+    scrVertex = new const float* [coords];
+    for (int i = 0; i < coords; i++) {
+        scrVertex[i] = new const float [count];
     }
     // создание массива цветов
-    float **scrColor;
-    scrColor = new float* [RGBA];
+    const float **scrColor;
+    scrColor = new const float* [count];
     for (int i = 0; i < count; i++) {
-        scrColor[i] = new float [count];
+        scrColor[i] = new const float [RGBA];
     }
-    // создание выходного массива
-     
+    // создание выходного массива координат
+    float **dstVertex;
+    dstVertex = new float* [coords];
+    for (int i = 0; i < coords; i++) {
+        dstVertex[i] = new float [maxDstSize];
+    }
+    float **dstColor;
+    dstColor = new float* [maxDstSize];
+    for (int i = 0; i < maxDstSize; i++) {
+        dstVertex[i] = new float [RGBA];
+    }
+    int *scrTreatedCount = 0;
+    /********************************************/
+    for (int i = 0; i < count; i++) {
+        triangulate(scrVertex[0], scrColor[i], count, maxWidth, maxHeight, maxDstSize, dstVertex[i], dstColor[i], scrTreatedCount);
+    }
+    
 
     // удаляем массивы
     for (int i = 0; i < coords; i++) {
@@ -36,6 +52,10 @@ int main() {
         delete [] scrColor[i];
     }
     delete scrColor;
+    for (int i = 0; i < coords; i++)    {
+        delete [] dstVertex[i];
+    }
+    delete dstVertex;
 
     return 0;
 }
@@ -43,8 +63,29 @@ int main() {
 
 int triangulate(const float *scrVertex, const float *scrColor, int scrCount, int maxWidth, 
                 int maxHeight, int maxDstSize, float *dstVertex, float *dstColor, int *scrTreatedCount) {
-    // scrVertex входной массив треугольников 
-    // 
+    // проверка не превосходит ли треугольник по ширине
+    if (abs(scrVertex[0] - scrVertex[3]) > maxWidth) {
 
+    }
+    else if ( abs(scrVertex[0] - scrVertex[6]) > maxWidth) {
 
+    } 
+    else if (abs(scrVertex[3] - scrVertex[6]) > maxWidth) {
+
+    }
+    else {
+        scrTreatedCount++;
+        return 1;
+    }
+    // проверка не превосходит ли треугольник по высоте
+    /*
+    if (abs(scrVertex[2] - scrVertex[3]) > maxHeight) {
+
+    } 
+    else {
+        scrTreatedCount++;
+        return 2;
+    }
+    */
+    return 0;
 }
