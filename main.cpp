@@ -39,7 +39,7 @@ int main() {
     int *scrTreatedCount = 0;
     /********************************************/
     for (int i = 0; i < count; i++) {
-        triangulate(scrVertex[0], scrColor[i], count, maxWidth, maxHeight, maxDstSize, dstVertex[i], dstColor[i], scrTreatedCount);
+        triangulate(scrVertex[i], scrColor[i], count, maxWidth, maxHeight, maxDstSize, dstVertex[i], dstColor[i], scrTreatedCount);
     }
     
 
@@ -74,6 +74,9 @@ int triangulate(const float *scrVertex, const float *scrColor, int scrCount, int
 
     }
     else {
+        for (int i = 0; i < 9; i++) {
+            dstVertex[i] = scrVertex[i];
+        }
         scrTreatedCount++;
         return 1;
     }
