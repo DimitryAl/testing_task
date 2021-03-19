@@ -1,7 +1,4 @@
-// Test.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+п»ї#include <iostream>
 #include <math.h>
 
 void output(float x) {
@@ -19,9 +16,10 @@ void func(int* scrVertex, int* res) {
 
 void foo(float arr[], float maxWidth, float maxHeight) {
 
-    float dir[3] = { 0, 0, 0 };     //напрвляющий вектор
+    float dir[3] = { 0, 0, 0 };     //Г­Е•ДЏД‘ГўГ«Л™ЕЈЕЇДЌГ© ГўДєД™Е€Г®Д‘
     float triangle1[9];
     float triangle2[9];
+    //float maxWidth = maxWidth1 / 2;
 
     for (int i = 0; i < 9; i++) {
         triangle1[i] = arr[i];
@@ -30,7 +28,7 @@ void foo(float arr[], float maxWidth, float maxHeight) {
     float t;
 
 
-    // проверка не превосходит ли треугольник по ширине(проекция на x )
+    // ДЏД‘Г®ГўДєД‘Д™Е• Г­Дє ДЏД‘ДєГўГ®Е„Е‘Г®Г¤ДЌЕ€ Г«ДЌ Е€Д‘ДєГіДѓГ®Г«ГјГ­ДЌД™ ДЏГ® Е™ДЌД‘ДЌГ­Дє(ДЏД‘Г®ДєД™Г¶ДЌЛ™ Г­Е• x )
     if (abs(arr[0] - arr[3]) > maxWidth) {
         dir[0] = arr[3] - arr[0];
         dir[1] = arr[4] - arr[1];
@@ -79,8 +77,8 @@ void foo(float arr[], float maxWidth, float maxHeight) {
         foo(triangle1, maxWidth, maxHeight);
         foo(triangle2, maxWidth, maxHeight);
     }
-    //проверка на Y
-    else if (abs(arr[1] - arr[4]) > maxHeight) {            
+    //ДЏД‘Г®ГўДєД‘Д™Е• Г­Е• Y
+    else if (abs(arr[1] - arr[4]) > maxHeight) {
         dir[0] = arr[3] - arr[0];
         dir[1] = arr[4] - arr[1];
         dir[2] = arr[5] - arr[2];
@@ -123,7 +121,7 @@ void foo(float arr[], float maxWidth, float maxHeight) {
         triangle1[8] = dir[2] * t + arr[2];
         triangle2[0] = triangle1[6];
         triangle2[1] = triangle1[7];
-        triangle2[3] = triangle1[8];
+        triangle2[2] = triangle1[8];
 
         foo(triangle1, maxWidth, maxHeight);
         foo(triangle2, maxWidth, maxHeight);
@@ -139,15 +137,138 @@ void foo(float arr[], float maxWidth, float maxHeight) {
 }
 
 
+void foo2(float arr[], float maxWidth, float maxHeight) {
+
+    float dir[3] = { 0, 0, 0 };     //Г­Е•ДЏД‘ГўГ«Л™ЕЈЕЇДЌГ© ГўДєД™Е€Г®Д‘
+    float triangle1[9];
+    float triangle2[9];
+
+    for (int i = 0; i < 9; i++) {
+        triangle1[i] = arr[i];
+        triangle2[i] = arr[i];
+    }
+    float t;
+
+
+    // ДЏД‘Г®ГўДєД‘Д™Е• Г­Дє ДЏД‘ДєГўГ®Е„Е‘Г®Г¤ДЌЕ€ Г«ДЌ Е€Д‘ДєГіДѓГ®Г«ГјГ­ДЌД™ ДЏГ® Е™ДЌД‘ДЌГ­Дє(ДЏД‘Г®ДєД™Г¶ДЌЛ™ Г­Е• x )
+    if (abs(arr[0] - arr[3]) > maxWidth) {
+        dir[0] = arr[3] - arr[0];
+        dir[1] = arr[4] - arr[1];
+        dir[2] = arr[5] - arr[2];
+
+        triangle1[0] = arr[0] + abs(arr[3] - arr[0]) / 2;
+        t = (triangle1[0] - arr[0]) / (arr[3] - arr[0]);
+        triangle1[1] = dir[1] * t + arr[1];
+        triangle1[2] = dir[2] * t + arr[2];
+        triangle2[3] = triangle1[0];
+        triangle2[4] = triangle1[1];
+        triangle2[5] = triangle1[2];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+    else if (abs(arr[0] - arr[6]) > maxWidth) {
+        dir[0] = arr[6] - arr[0];
+        dir[1] = arr[7] - arr[1];
+        dir[2] = arr[8] - arr[2];
+
+        triangle1[0] = arr[0] + abs(arr[6] - arr[0]) / 2;
+        t = (triangle1[0] - arr[0]) / (arr[6] - arr[0]);
+        triangle1[1] = dir[1] * t + arr[1];
+        triangle1[2] = dir[2] * t + arr[2];
+        triangle2[6] = triangle1[0];
+        triangle2[7] = triangle1[1];
+        triangle2[8] = triangle1[2];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+     else if (abs(arr[3] - arr[6]) > maxWidth) {
+        dir[0] = arr[6] - arr[3];
+        dir[1] = arr[7] - arr[4];
+        dir[2] = arr[8] - arr[5];
+
+        triangle1[6] = arr[3] + abs(arr[6] - arr[3]) / 2;
+        t = (triangle1[0] - arr[3]) / (arr[6] - arr[3]);
+        triangle1[7] = dir[1] * t + arr[4];
+        triangle1[8] = dir[2] * t + arr[5];
+        triangle2[3] = triangle1[6];
+        triangle2[4] = triangle1[7];
+        triangle2[5] = triangle1[8];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+    //ДЏД‘Г®ГўДєД‘Д™Е• Г­Е• Y
+    else if (abs(arr[1] - arr[4]) > maxHeight) {
+        dir[0] = arr[3] - arr[0];
+        dir[1] = arr[4] - arr[1];
+        dir[2] = arr[5] - arr[2];
+
+        triangle1[4] = arr[1] +abs(arr[4] - arr[1]) / 2;;
+        t = (triangle1[4] - arr[1]) / dir[1];
+        triangle1[3] = dir[0] * t + arr[0];
+        triangle1[5] = dir[2] * t + arr[2];
+        triangle2[0] = triangle1[3];
+        triangle2[1] = triangle1[4];
+        triangle2[2] = triangle1[5];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+    else if (abs(arr[4] - arr[7]) > maxHeight) {
+        dir[0] = arr[6] - arr[3];
+        dir[1] = arr[7] - arr[4];
+        dir[2] = arr[8] - arr[5];
+
+        triangle1[7] = arr[4] + abs(arr[7] - arr[4]) / 2;;
+        t = (triangle1[7] - arr[4]) / dir[1];
+        triangle1[6] = dir[0] * t + arr[3];
+        triangle1[8] = dir[2] * t + arr[5];
+        triangle2[3] = triangle1[6];
+        triangle2[4] = triangle1[7];
+        triangle2[5] = triangle1[8];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+    else if (abs(arr[1] - arr[7]) > maxHeight) {
+        dir[0] = arr[6] - arr[0];
+        dir[1] = arr[7] - arr[1];
+        dir[2] = arr[8] - arr[2];
+
+        triangle1[7] = arr[1] + abs(arr[7] - arr[4]) / 2;;
+        t = (triangle1[7] - arr[1]) / dir[1];
+        triangle1[6] = dir[0] * t + arr[0];
+        triangle1[8] = dir[2] * t + arr[2];
+        triangle2[0] = triangle1[6];
+        triangle2[1] = triangle1[7];
+        triangle2[2] = triangle1[8];
+
+        foo2(triangle1, maxWidth, maxHeight);
+        foo2(triangle2, maxWidth, maxHeight);
+    }
+    else {
+        std::cout << "triangle is ok:\t";
+        for (int i = 0; i < 9; i++) {
+            output(arr[i]);
+        }
+        std::cout << std::endl << std::endl;
+
+    }
+}
+
 int main()
 {
     const int N = 9;
     float maxWidth = 10;
     float maxHeight = 10;
 
-    //float vertex[N] = { 50, 40, 10, 60, 50, 0, 75, 65, 30 };
-    float vertex[N] = { 50, 45, 10, 60, 55, 0, 60, 70, 30 };
+    float vertex[N] = { 50, 40, 10, 60, 50, 0, 75, 65, 30 };
+    //float vertex[N] = { 50, 45, 10, 60, 55, 0, 60, 70, 30 };
+    //float vertex[N] = { 25,12.5,5, 30,27.5,0, 30,35,15 };
     //float vertex[N] = {0,45,10, 10,55,15, 15,70,20 };
+    //float vertex[N] = { -50, 0, 0, 50, 0, 0, 0, 50, 0 };
 
     for (int i = 0; i < N; i++) {
         output(vertex[i]);
@@ -155,6 +276,8 @@ int main()
     std::cout << std::endl;
 
     foo(vertex, maxWidth, maxHeight);
+    std::cout << "\nfoo2\n";
+    //foo2(vertex, maxWidth, maxHeight);
 
     return 0;
 }
