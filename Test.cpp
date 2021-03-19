@@ -5,7 +5,7 @@
 #include <math.h>
 
 void output(float x) {
-    std::cout << x << "\t";
+    std::cout << x << "  ";
 }
 
 void func(int* scrVertex, int* res) {
@@ -20,7 +20,6 @@ void func(int* scrVertex, int* res) {
 void foo(float arr[], float maxWidth, float maxHeight) {
 
     float dir[3] = { 0, 0, 0 };     //напрвляющий вектор
-    //float new_x, new_y, new_z;
     float triangle1[9];
     float triangle2[9];
 
@@ -80,13 +79,54 @@ void foo(float arr[], float maxWidth, float maxHeight) {
         foo(triangle1, maxWidth, maxHeight);
         foo(triangle2, maxWidth, maxHeight);
     }
-    else if (true) {
+    //проверка на Y
+    else if (abs(arr[1] - arr[4]) > maxHeight) {            
+        dir[0] = arr[3] - arr[0];
+        dir[1] = arr[4] - arr[1];
+        dir[2] = arr[5] - arr[2];
 
-    }
-    else if (true) {
-    }
-    else if (true) {
+        triangle1[4] = arr[1] + maxHeight;
+        t = (triangle1[4] - arr[1]) / dir[1];
+        triangle1[3] = dir[0] * t + arr[0];
+        triangle1[5] = dir[2] * t + arr[2];
+        triangle2[0] = triangle1[3];
+        triangle2[1] = triangle1[4];
+        triangle2[2] = triangle1[5];
 
+        foo(triangle1, maxWidth, maxHeight);
+        foo(triangle2, maxWidth, maxHeight);
+    }
+    else if (abs(arr[4] - arr[7]) > maxHeight) {
+        dir[0] = arr[6] - arr[3];
+        dir[1] = arr[7] - arr[4];
+        dir[2] = arr[8] - arr[5];
+
+        triangle1[7] = arr[4] + maxHeight;
+        t = (triangle1[7] - arr[4]) / dir[1];
+        triangle1[6] = dir[0] * t + arr[3];
+        triangle1[8] = dir[2] * t + arr[5];
+        triangle2[3] = triangle1[6];
+        triangle2[4] = triangle1[7];
+        triangle2[5] = triangle1[8];
+
+        foo(triangle1, maxWidth, maxHeight);
+        foo(triangle2, maxWidth, maxHeight);
+    }
+    else if (abs(arr[1] - arr[7]) > maxHeight) {
+        dir[0] = arr[6] - arr[0];
+        dir[1] = arr[7] - arr[1];
+        dir[2] = arr[8] - arr[2];
+
+        triangle1[7] = arr[1] + maxHeight;
+        t = (triangle1[7] - arr[1]) / dir[1];
+        triangle1[6] = dir[0] * t + arr[0];
+        triangle1[8] = dir[2] * t + arr[2];
+        triangle2[0] = triangle1[6];
+        triangle2[1] = triangle1[7];
+        triangle2[3] = triangle1[8];
+
+        foo(triangle1, maxWidth, maxHeight);
+        foo(triangle2, maxWidth, maxHeight);
     }
     else {
         std::cout << "triangle is ok:\t";
@@ -105,7 +145,10 @@ int main()
     float maxWidth = 10;
     float maxHeight = 10;
 
-    float vertex[N] = { 50, 40, 10, 60, 50, 0, 75, 65, 30 };
+    //float vertex[N] = { 50, 40, 10, 60, 50, 0, 75, 65, 30 };
+    float vertex[N] = { 50, 45, 10, 60, 55, 0, 60, 70, 30 };
+    //float vertex[N] = {0,45,10, 10,55,15, 15,70,20 };
+
     for (int i = 0; i < N; i++) {
         output(vertex[i]);
     }
