@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <math.h>
 
 int triangulate(const float* scrVertex, const float* scrColor, int scrCount, int maxWidth,
@@ -6,26 +6,26 @@ int triangulate(const float* scrVertex, const float* scrColor, int scrCount, int
 
 int main()
 {
-    const int scrCount = 2;     // кол-во треугольников
-    const int coords = 9;     // кол-во координат
-    int RGBA = 4;       // кол-во цветовых компонент
-    int maxWidth = 10;    // максимальныя ширина треугольника
-    int maxHeight = 10;   // максимальная высота треуголтника
-    int maxDstSize = 20;  // макс кол-во треуголтников в выходном массиве
-    int* scrTreatedCount = 0;   //Число подлностью обработанных входных треугольников
+    const int scrCount = 2;     // РєРѕР»-РІРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
+    const int coords = 9;     // РєРѕР»-РІРѕ РєРѕРѕСЂРґРёРЅР°С‚
+    int RGBA = 4;       // РєРѕР»-РІРѕ С†РІРµС‚РѕРІС‹С… РєРѕРјРїРѕРЅРµРЅС‚
+    int maxWidth = 10;    // РјР°РєСЃРёРјР°Р»СЊРЅС‹СЏ С€РёСЂРёРЅР° С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°
+    int maxHeight = 10;   // РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РІС‹СЃРѕС‚Р° С‚СЂРµСѓРіРѕР»С‚РЅРёРєР°
+    int maxDstSize = 20;  // РјР°РєСЃ РєРѕР»-РІРѕ С‚СЂРµСѓРіРѕР»С‚РЅРёРєРѕРІ РІ РІС‹С…РѕРґРЅРѕРј РјР°СЃСЃРёРІРµ
+    int* scrTreatedCount = 0;   //Р§РёСЃР»Рѕ РїРѕРґР»РЅРѕСЃС‚СЊСЋ РѕР±СЂР°Р±РѕС‚Р°РЅРЅС‹С… РІС…РѕРґРЅС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
 
-    // создание входного массива координат
+    // СЃРѕР·РґР°РЅРёРµ РІС…РѕРґРЅРѕРіРѕ РјР°СЃСЃРёРІР° РєРѕРѕСЂРґРёРЅР°С‚
     const float scrVertex[scrCount][coords] = {
         {0,45,10, 10,55,15, 15,70,20 },
         { -10, 0, 0, 10, 0, 0, 0, 0, 10 }
     };
-    // создание массива цветов
+    // СЃРѕР·РґР°РЅРёРµ РјР°СЃСЃРёРІР° С†РІРµС‚РѕРІ
     const float** scrColor;
     scrColor = new const float* [scrCount];
     for (int i = 0; i < scrCount; i++) {
         scrColor[i] = new const float[RGBA];
     }
-    // создание выходного массива координат
+    // СЃРѕР·РґР°РЅРёРµ РІС‹С…РѕРґРЅРѕРіРѕ РјР°СЃСЃРёРІР° РєРѕРѕСЂРґРёРЅР°С‚
     float** dstVertex;
     dstVertex = new float* [maxDstSize];
     for (int i = 0; i < maxDstSize; i++) {
