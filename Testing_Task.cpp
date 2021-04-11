@@ -388,7 +388,7 @@ int triangulate(const float* scrVertex, const float* scrColor, int scrCount, int
             triangle1[6] = scrVertex[3] + maxWidth;
         }
 
-        t = (triangle1[0] - scrVertex[3]) / (scrVertex[6] - scrVertex[3]);
+        t = (triangle1[0] - scrVertex[3]) / (scrVertex[6] - scrVertex[3]); //mistake
         triangle1[7] = dir[1] * t + scrVertex[4];
         triangle1[8] = dir[2] * t + scrVertex[5];
         triangle2[3] = triangle1[6];
